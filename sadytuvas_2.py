@@ -46,10 +46,15 @@ class Saldytuvas:
     def istraukti(self, product:str, quantity:float):
         pass
 
-    def perziureti(self):
-        pass
+    def ieskoti_produkta(self):
+        produktai = input('Produkto paieska: ')
+        if produktai in self.saldytuvas:
+            grizo = print(f'{produktai} yra: {self.saldytuvas[produktai]}')
+        else:
+            print('produkto nera saldytuve')
+        return grizo
 
-    def ieskoti_produkta(self, product:str):
+    def ieskoti_produkta(self):
         pass
 
     def svoris(self):
