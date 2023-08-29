@@ -11,17 +11,14 @@ meniu = """
  0 - išėjimas
          """
 
-try:
-    with open("fridge.json", "r+") as saldytuvas_dict:
-        saldytuvas = json.load(saldytuvas_dict)
-except:
-    saldytuvas = {}
-    with open("fridge.json", "w") as saldytuvas_dict:
-        json.dump(saldytuvas, saldytuvas_dict)
 
 class Saldytuvas:
-    
-    turinys = saldytuvas
+    def __init__(self) -> None:
+        try:
+            with open("fridge.json", "r+") as saldytuvas_failas:
+                self.turinys = json.load(saldytuvas_failas)
+        except:
+            self.turinys = {}
 
     def prideti(self, produktas, kiekis):
         self.turinys[produktas] = kiekis
@@ -35,17 +32,16 @@ class Saldytuvas:
 
         print("Saldytuve yra tokie produktai: ", "\n")
         print(f"{'Nr.':3s} | {'Maisto produktas':15s} | {'Produkto kiekis':10s}", end="\n")
-        for produktas in self:
-            print(f"{indeksas+1:>3d} | {produktas:<16s} | {self[produktas]}")
+        for produktas in self.turinys:
+            print(f"{indeksas+1:>3d} | {produktas:<16s} | {self.turinys[produktas]}")
             indeksas += 1
 
         pasirinktas_indeksas = int(input("Parasykite norimo produkto numeri: ")) -1
         prideti = int(input("Parasykite kiek norite prideti produkto: "))
 
-        pasirinktas_produktas = self[pasirinktas_indeksas]
-        self[pasirinktas_produktas] += prideti
+        pasirinktas_produktas = self.turinys[pasirinktas_indeksas]
+        self.turinys[pasirinktas_produktas] += prideti
 
-        return self
     
     def istraukti(self, product:str, quantity:float):
         pass
